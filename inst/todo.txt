@@ -1,0 +1,11 @@
+To do:
+
+
+1.    Recording incoming registrations
+
+- student indicates they want to be in the
+competition--record that.
+
+2.    Recording volunteer judges
+3.    Assigning judges to students
+4.    Scheduling the talks

@@ -1,0 +1,10 @@
+Package: SSCcompetition
+Type: Package
+Title: Helper for Running SSC Student Research Competition
+Version: 0.1.0
+Author: STAT 9864
+Maintainer: Duncan Murdoch <murdoch@stats.uwo.ca>
+Description: Helps manage data for scheduling students
+   in the SSC SRC.
+License: GPL
+LazyData: TRUE
