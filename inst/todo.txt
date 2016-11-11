@@ -6,6 +6,9 @@ To do:
 - student indicates they want to be in the
 competition--record that.
 
+ -- add a way to look at the records
+ -- add a way to correct errors in the records
+
 2.    Recording volunteer judges
 3.    Assigning judges to students
 4.    Scheduling the talks
