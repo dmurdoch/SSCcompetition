@@ -1,1 +1,4 @@
-exportPattern("^[[:alpha:]]+")
+export("newStudent", "showTable")
+importFrom("RSQLite", "dbDisconnect",
+           "dbConnect", "dbWriteTable",
+           "SQLite", "dbGetQuery")

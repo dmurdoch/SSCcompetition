@@ -12,3 +12,4 @@ competition--record that.
 2.    Recording volunteer judges
 3.    Assigning judges to students
 4.    Scheduling the talks
+5.    Handle dates in the tables
