@@ -1,4 +1,4 @@
-export("newStudent", "showTable")
+export("newStudent", "replaceTable", "showTable")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",
            "SQLite", "dbGetQuery")
