@@ -1,5 +1,8 @@
-export("editTable", "newJudge", "newStudent", "replaceTable", "showTable")
+export("assignJudges",
+       "editTable", "getTalks",
+       "newJudge", "newStudent", "replaceTable", "showTable")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",
            "SQLite", "dbGetQuery")
+importFrom("DBI", "sqlInterpolate")
 importFrom("utils", "edit")
