@@ -20,3 +20,6 @@ A text description of the self-described expertise of the judge.
 Employer of the judge.
 }
 }
+\examples{
+newJudge("Duncan Murdoch", "everything", "UWO")
+}

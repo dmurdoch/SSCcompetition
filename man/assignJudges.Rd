@@ -7,19 +7,19 @@ Assign judges to a student
 Assign judges by id to a student.
 }
 \usage{
-assignJudges(student, judge1Id, judge2Id)
+assignJudges(studentID, judgeID, append = TRUE)
 }
 \arguments{
-  \item{student}{
-Student name (or an SQL pattern matching one uniquely)
+  \item{studentID}{
+Student ID number(s)
 }
-  \item{judge1Id}{
-Numeric id of one judge.
+  \item{judgeID}{
+Numeric id of judge(s)
 }
-  \item{judge2Id}{
-Numeric id of another judge.
+  \item{append}{
+Whether to add judges, or replace them
 }
 }
 \examples{
-assignJudges("\%Trump\%", 1,2)
+  assignJudges(getID("\%Trump\%"), getID("\%Murdoch\%", "Judges"))
 }

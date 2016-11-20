@@ -1,5 +1,5 @@
 export("assignJudges",
-       "editTable", "getTalks",
+       "editTable", "getID", "getTalks",
        "newJudge", "newStudent", "replaceTable", "showTable")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",

@@ -1,22 +1,31 @@
-assignJudges <- function(student, judge1Id, judge2Id) {
-  len <- max(length(student), length(judge1Id), length(judge2Id))
-  student <- rep(student, length.out=len)
-  judge1Id <- rep(judge1Id, length.out=len)
-  judge2Id <- rep(judge2Id, length.out=len)
+assignJudges <- function(studentID, judgeID, append = TRUE) {
+  len <- max(length(studentID), length(judgeID))
+  studentID <- rep(studentID, length.out=len)
+  judgeID <- rep(judgeID, length.out=len)
   conn <- getConn()
   on.exit(doneWith(conn))
+  if (!append) {
+    students <- unique(studentID)
+    for (i in seq_along(students)) {
+      query <- sqlInterpolate(conn,
+                              "delete from Judging where studentId = ?student",
+                              student = students[i])
+      dbGetQuery(conn, query)
+    }
+  }
   for (i in seq_len(len)) {
-    studentRec <- getTalks(student = student[i])
-    if (nrow(studentRec) > 1)
-      stop("Multiple student matches:", paste(studentRec$name, collapse=","))
-    if (nrow(studentRec) == 0)
-      stop("No student match to ", student[i])
-    query <- "update Students set judge1Id = ?judge1, judge2Id = ?judge2
-                     where name like ?student"
-    query <- sqlInterpolate(conn, query, student = student,
-                                         judge1 = judge1Id,
-                                         judge2 = judge2Id)
-    dbGetQuery(conn, query)
+    query <- sqlInterpolate(conn,
+                            "select * from Judging where studentId = ?student and
+                             judgeId = ?judge",
+                            student = studentID[i], judge = judgeID[i])
+    existing <- dbGetQuery(conn, query)
+    if (!nrow(existing)) {
+      query <- sqlInterpolate(conn,
+                              "insert into Judging (StudentId, JudgeId)
+                                values (?student, ?judge)",
+                              student = studentID[i], judge = judgeID[i])
+      dbGetQuery(conn, query)
+    }
   }
 }
 
