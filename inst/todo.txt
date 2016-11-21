@@ -4,12 +4,12 @@ To do:
 1.    Recording incoming registrations
 
 - student indicates they want to be in the
-competition--record that.
+competition--record that. DONE
 
- -- add a way to look at the records
- -- add a way to correct errors in the records
+ -- add a way to look at the records DONE
+ -- add a way to correct errors in the records DONE
 
-2.    Recording volunteer judges
-3.    Assigning judges to students
+2.    Recording volunteer judges DONE
+3.    Assigning judges to students DONE
 4.    Scheduling the talks
-5.    Handle dates in the tables
+5.    Handle dates in the tables DONE
