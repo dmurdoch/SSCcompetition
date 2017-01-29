@@ -9,5 +9,3 @@ Description: Helps manage data for scheduling students
 License: GPL
 LazyData: TRUE
 Imports: DBI, RSQLite
-VignetteBuilder: knitr
-Suggests: knitr

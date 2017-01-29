@@ -8,7 +8,13 @@ Add a new student to the database
 when the registration message is received.
 }
 \usage{
-newStudent(name, affiliation = "", date = Sys.Date())
+newStudent(name,
+          affiliation = "",
+          date = Sys.Date(),
+          title = NA_character_,
+          abstract = NA_character_,
+          confirmed = FALSE,
+          summaryFile = NA_character_)
 }
 \arguments{
   \item{name}{
@@ -20,6 +26,9 @@ The university of the student.
   \item{date}{
 Date of registration.
 }
+  \item{title, abstract}{Title and abstract of talk/poster}
+  \item{confirmed}{Has confirmation been received from supervisor?}
+  \item{summaryFile}{Filename of summary document received from student.}
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~
@@ -30,5 +39,7 @@ in order of registration.
 }
 
 \examples{
+\dontrun{
 newStudent("Trump, Donald", "Trump University")
+}
 }

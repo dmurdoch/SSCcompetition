@@ -21,5 +21,7 @@ Whether to add judges, or replace them
 }
 }
 \examples{
+\dontrun{
   assignJudges(getID("\%Trump\%"), getID("\%Murdoch\%", "Judges"))
+}
 }

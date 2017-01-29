@@ -26,5 +26,7 @@ Is a unique answer needed?  If TRUE, anything else is an error.
 A vector of ID numbers (one by default).
 }
 \examples{
+\dontrun{
 getID("\%Trump\%")
+}
 }
