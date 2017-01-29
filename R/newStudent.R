@@ -1,4 +1,7 @@
-newStudent <- function(name, affiliation = "", date = Sys.Date()) {
+newStudent <- function(name, affiliation = "",
+                       date = Sys.Date(), title = NA_character_,
+                       abstract = NA_character_, confirmed = FALSE,
+                       summaryFile = NA_character_) {
   idnum <- getID(name, unique = FALSE)
   if (length(idnum)) {
     warning("Student ", dQuote(name), " already in table, not added.")
@@ -6,8 +9,14 @@ newStudent <- function(name, affiliation = "", date = Sys.Date()) {
   }
 
   idnum <- newIdnum("Students")
+  date <- as.Date(date)
+
   df <- data.frame(idnum = idnum, name = name, affiliation = affiliation,
-                   date = as.numeric(date))
+                   date = as.numeric(date),
+                   title = as.character(title),
+                   abstract = as.character(abstract),
+                   confirmed = as.logical(confirmed),
+                   summaryFile = as.character(summaryFile))
   conn <- getConn()
   on.exit(doneWith(conn))
   dbWriteTable(conn, "Students", value = df, append =TRUE)
