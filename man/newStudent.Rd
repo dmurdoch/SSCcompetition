@@ -14,6 +14,7 @@ newStudent(name,
           title = NA_character_,
           abstract = NA_character_,
           confirmed = FALSE,
+          email = "",
           summaryFile = NA_character_)
 }
 \arguments{
@@ -28,6 +29,7 @@ Date of registration.
 }
   \item{title, abstract}{Title and abstract of talk/poster}
   \item{confirmed}{Has confirmation been received from supervisor?}
+  \item{email}{The student's email address}
   \item{summaryFile}{Filename of summary document received from student.}
 }
 %\details{

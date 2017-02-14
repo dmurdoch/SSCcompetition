@@ -2,8 +2,11 @@
 showTable <- function(name) {
   conn <- getConn()
   on.exit(doneWith(conn))
-  result <- dbGetQuery(conn, paste("SELECT * FROM ", name))
-  if (name == "Students") {
+  extra <- ""
+  if (tolower(name) == "students")
+    extra <- "ORDER BY name"
+  result <- dbGetQuery(conn, paste("SELECT * FROM ", name, extra))
+  if (tolower(name) == "students") {
     result$date <- as.Date(result$date, origin = "1970-01-01")
     result$confirmed <- as.logical(result$confirmed)
   }

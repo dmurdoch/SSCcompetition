@@ -1,6 +1,7 @@
 newStudent <- function(name, affiliation = "",
                        date = Sys.Date(), title = NA_character_,
                        abstract = NA_character_, confirmed = FALSE,
+                       email = "",
                        summaryFile = NA_character_) {
   idnum <- getID(name, unique = FALSE)
   if (length(idnum)) {
@@ -16,7 +17,9 @@ newStudent <- function(name, affiliation = "",
                    title = as.character(title),
                    abstract = as.character(abstract),
                    confirmed = as.logical(confirmed),
-                   summaryFile = as.character(summaryFile))
+                   summaryFile = as.character(summaryFile),
+                   email = as.character(email),
+                   stringsAsFactors = FALSE)
   conn <- getConn()
   on.exit(doneWith(conn))
   dbWriteTable(conn, "Students", value = df, append =TRUE)
