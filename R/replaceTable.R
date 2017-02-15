@@ -1,5 +1,5 @@
 replaceTable <- function(table, df) {
-  if (table == "Students") {
+  if (tolower(table) == "students") {
     df$date <- as.numeric(as.Date(df$date))
     df$confirmed <- as.numeric(as.logical(df$confirmed))
   }

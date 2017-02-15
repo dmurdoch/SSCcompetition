@@ -15,7 +15,7 @@ showTable <- function(name) {
 
 editTable <- function(name) {
   table <- showTable(name)
-  if (name == "Students") {
+  if (tolower(name) == "students") {
     table$date <- as.character(table$date)
   }
   table <- edit(table)
