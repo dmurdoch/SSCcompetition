@@ -1,6 +1,7 @@
-export("assignJudges", "confirmStudent",
+export("assignJudges",
        "editTable", "getID", "getTalks",
-       "newJudge", "newStudent", "replaceTable", "showName",
+       "newJudge", "newStudent", "replaceTable",
+       "setConfirmed", "showName",
        "showTable")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",

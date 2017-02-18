@@ -1,11 +1,19 @@
 
-showTable <- function(name) {
+showTable <- function(name, where = NA, orderby = NA, params) {
   conn <- getConn()
   on.exit(doneWith(conn))
   extra <- ""
-  if (tolower(name) == "students")
-    extra <- "ORDER BY name"
-  result <- dbGetQuery(conn, paste("SELECT * FROM ", name, extra))
+  if (!is.na(where))
+    extra <- paste(extra, "WHERE", where)
+  if (missing(orderby) && tolower(name) == "students")
+    orderby <- "lower(name)"
+  if (!is.na(orderby))
+    extra <- paste(extra, "ORDER BY", orderby)
+  query <- paste("SELECT * FROM ", name, extra)
+  if (missing(params))
+    result <- dbGetQuery(conn, query)
+  else
+    result <- dbGetQuery(conn, query, param = params)
   if (tolower(name) == "students") {
     result$date <- as.Date(result$date, origin = "1970-01-01")
     result$confirmed <- as.logical(result$confirmed)
