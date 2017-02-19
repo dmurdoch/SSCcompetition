@@ -1,10 +1,10 @@
 export("assignJudges",
        "editTable", "getID", "getTalks", "mergeSSC",
        "newJudge", "newStudent", "replaceTable",
-       "setConfirmed", "showName",
+       "showName",
        "showTable", "updateStudents")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",
            "SQLite", "dbGetQuery")
 importFrom("DBI", "sqlInterpolate")
-importFrom("utils", "edit")
+importFrom("utils", "edit", "read.csv")
