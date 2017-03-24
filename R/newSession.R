@@ -10,6 +10,8 @@ newSession <- function(name, date = NA, time = NA, contributed = TRUE) {
     datetime <- NA
   else
     datetime <- as.POSIXct(paste(date, time), tz="CST6CDT")
+  if (name == "")
+    name <- "Poster Session"
   df <- data.frame(idnum = idnum, name = name,
                    datetime = as.numeric(datetime),
                    contributed = as.numeric(contributed),
@@ -29,7 +31,7 @@ loadSessions <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Aw
       session <- newSession(talk$Session,
                  date = if (nchar(talk$Date)) talk$Date else NA,
                  time = if (nchar(talk$StartTime)) talk$StartTime else NA,
-                 contributed = talk$Type.of.Presentation == "Contributed")
+                 contributed = talk$Type.of.Presentation != "Invited")
     } else if (length(session) > 1)
       stop("Too many session records: ", dQuote(talk$Session))
   }

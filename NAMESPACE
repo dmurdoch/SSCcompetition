@@ -1,6 +1,7 @@
 export("assignJudges",
-       "editTable", "getID", "getTalks", "mergeSSC",
-       "newJudge", "newStudent", "replaceTable",
+       "editTable", "entrySummary", "getID", "getTalks", "loadSessions",
+       "mergeSSC",
+       "newJudge", "newSession", "newStudent", "replaceTable",
        "showName",
        "showTable", "updateStudents")
 importFrom("RSQLite", "dbDisconnect",
