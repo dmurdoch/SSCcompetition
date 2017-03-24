@@ -16,3 +16,32 @@ updateStudents <- function(db) {
     }
   }
 }
+
+getStudent <- function(...) {
+  conn <- getConn()
+  on.exit(doneWith(conn))
+  names <- names(list(...))
+  values <- list(...)
+  query <- paste("SELECT * FROM Students WHERE", paste0(names, " = :", names))
+  dbGetQuery(conn, query, params = values)
+}
+
+loadTiming <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-Schedule-final-2.csv") {
+  talks <- read.csv(csv, stringsAsFactors = FALSE)
+  for (i in seq_len(nrow(talks))) {
+    talk <- talks[i,]
+    if (talk$Type.of.Presentation == "Poster")
+      talk$Session <- "Poster Session"
+    session <- getID(talk$Session, "Sessions")
+    if (nchar(talk$Date))
+      datetime <- as.POSIXct(paste(talk$Date, talk$SpeakerStart), tz="CST6CDT")
+    else
+      datetime <- NA
+    student <- getStudent(submission = talk$Node.ID)
+    if (nrow(student)) {
+      student$datetime <- datetime
+      student$session <- session
+      updateStudents(student[,c("idnum", "datetime", "session")])
+    }
+  }
+}

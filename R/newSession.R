@@ -9,7 +9,7 @@ newSession <- function(name, date = NA, time = NA, contributed = TRUE) {
   if (is.na(date))
     datetime <- NA
   else
-    datetime <- as.POSIXct(paste(date, time), tz="CST6CDT")
+    datetime <- as.POSIXct(paste(date, time), tz="CST6CDT", origin = "1970-01-01")
   if (name == "")
     name <- "Poster Session"
   df <- data.frame(idnum = idnum, name = name,
@@ -26,6 +26,8 @@ loadSessions <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Aw
   talks <- read.csv(csv, stringsAsFactors = FALSE)
   for (i in seq_len(nrow(talks))) {
     talk <- talks[i,]
+    if (talk$Type.of.Presentation == "Poster")
+      talk$Session <- "Poster Session"
     session <- getID(talk$Session, "Sessions", unique = FALSE)
     if (length(session) == 0) {
       session <- newSession(talk$Session,
