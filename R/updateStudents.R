@@ -34,7 +34,8 @@ loadTiming <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Awar
       talk$Session <- "Poster Session"
     session <- getID(talk$Session, "Sessions")
     if (nchar(talk$Date))
-      datetime <- as.POSIXct(paste(talk$Date, talk$SpeakerStart), tz="CST6CDT")
+      datetime <- as.POSIXct(paste(talk$Date, talk$SpeakerStart), tz="CST6CDT",
+                             origin = "1970-01-01")
     else
       datetime <- NA
     student <- getStudent(submission = talk$Node.ID)

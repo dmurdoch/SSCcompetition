@@ -13,7 +13,7 @@ newStudent <- function(name, affiliation = "",
   idnum <- newIdnum("Students")
   date <- as.Date(date)
   if (!is.na(datetime))
-    datetime <- as.POSIXct(datetime, tz = "CST6CDT")
+    datetime <- as.POSIXct(datetime, tz = "CST6CDT", origin = "1970-01-01")
 
   df <- data.frame(idnum = idnum, name = name, affiliation = affiliation,
                    date = as.numeric(date),

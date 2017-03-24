@@ -3,7 +3,7 @@ export("assignJudges",
        "getTalks", "loadSessions", "loadTiming",
        "mergeSSC",
        "newJudge", "newSession", "newStudent", "replaceTable",
-       "showName",
+       "showCompetitors", "showName",
        "showTable", "updateStudents")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",

@@ -31,9 +31,9 @@ editTable <- function(name) {
   table <- showTable(name)
   if (tolower(name) == "students") {
     table$date <- as.character(table$date)
-    table$datetime <- as.character(table$datetime)
+    table$datetime <- as.character(table$datetime, tz = "CST6CDT")
   } else if (tolower(name) == "sessions") {
-    table$datetime <- as.character(table$datetime)
+    table$datetime <- as.character(table$datetime, tz = "CST6CDT")
   }
   table <- edit(table)
   replaceTable(name, table)
