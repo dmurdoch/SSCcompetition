@@ -15,7 +15,8 @@ newStudent(name,
           abstract = NA_character_,
           confirmed = FALSE,
           email = "",
-          summaryFile = NA_character_)
+          summaryFile = NA_character_,
+          datetime = NA, sessionId = NA)
 }
 \arguments{
   \item{name}{
@@ -31,10 +32,9 @@ Date of registration.
   \item{confirmed}{Has confirmation been received from supervisor?}
   \item{email}{The student's email address}
   \item{summaryFile}{Filename of summary document received from student.}
+  \item{datetime, sessionId}{When is the talk?}
 }
-%\details{
-%%  ~~ If necessary, more details than the description above ~~
-%}
+
 \value{
 A data frame containing all student records,
 in order of registration.

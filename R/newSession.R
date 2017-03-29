@@ -22,8 +22,9 @@ newSession <- function(name, date = NA, time = NA, contributed = TRUE) {
   invisible(idnum)
 }
 
-loadSessions <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-Schedule-final-2.csv") {
+loadSessions <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-ForKevin-final.csv") {
   talks <- read.csv(csv, stringsAsFactors = FALSE)
+  sessions <- showTable("sessions")
   for (i in seq_len(nrow(talks))) {
     talk <- talks[i,]
     if (talk$Type.of.Presentation == "Poster")
@@ -34,7 +35,14 @@ loadSessions <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Aw
                  date = if (nchar(talk$Date)) talk$Date else NA,
                  time = if (nchar(talk$StartTime)) talk$StartTime else NA,
                  contributed = talk$Type.of.Presentation != "Invited")
+      sessions <- rbind(sessions, data.frame(idnum = session, name = talk$Session,
+                                             datetime = as.POSIXct(paste(talk$Date, talk$StartTime), tz="CST6CDT", origin = "1970-01-01"),
+                                             contributed = talk$Type.of.Presentation != "Invited"))
+
+    } else if (length(session) == 1) {
+      sessions[sessions$idnum == session, "datetime"] <- as.POSIXct(paste(talk$Date, talk$StartTime), tz="CST6CDT", origin = "1970-01-01")
     } else if (length(session) > 1)
       stop("Too many session records: ", dQuote(talk$Session))
   }
+  replaceTable("sessions", sessions)
 }
