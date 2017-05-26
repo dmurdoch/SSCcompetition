@@ -1,6 +1,6 @@
 export("assignJudges",
        "editTable", "entrySummary", "getID", "getSession", "getStudent",
-       "getTalks", "loadSessions", "loadTiming",
+       "getTalks", "judgePackage", "loadSessions", "loadTiming",
        "mergeSSC",
        "newJudge", "newSession", "newStudent", "replaceTable",
        "showCompetitors", "showSchedule", "showName",

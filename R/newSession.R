@@ -22,7 +22,8 @@ newSession <- function(name, date = NA, time = NA, contributed = TRUE) {
   invisible(idnum)
 }
 
-loadSessions <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-ForKevin-final.csv") {
+loadSessions <- function(csv = paste0("~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/",
+                                      "ContributedPresentations-ForKevin-final.csv")) {
   talks <- read.csv(csv, stringsAsFactors = FALSE)
   sessions <- showTable("sessions")
   for (i in seq_len(nrow(talks))) {

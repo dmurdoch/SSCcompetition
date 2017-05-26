@@ -22,11 +22,12 @@ getStudent <- function(...) {
   on.exit(doneWith(conn))
   names <- names(list(...))
   values <- list(...)
-  query <- paste("SELECT * FROM Students WHERE", paste0(names, " = :", names))
+  query <- paste("SELECT * FROM Students WHERE", paste0(names, " = :", names, collapse = " and "))
   dbGetQuery(conn, query, params = values)
 }
 
-loadTiming <- function(csv = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-Schedule-final-2.csv") {
+loadTiming <- function(csv = paste0("~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/",
+                              "ContributedPresentations-Schedule-final-2.csv")) {
   talks <- read.csv(csv, stringsAsFactors = FALSE)
   for (i in seq_len(nrow(talks))) {
     talk <- talks[i,]
