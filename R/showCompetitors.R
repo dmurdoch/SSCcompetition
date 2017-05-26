@@ -3,7 +3,7 @@ getSession <- function(...) {
   on.exit(doneWith(conn))
   names <- names(list(...))
   values <- list(...)
-  query <- paste("SELECT * FROM Sessions WHERE", paste0(names, " = :", names))
+  query <- paste("SELECT * FROM Sessions WHERE", paste0(names, " = :", names, collapse = " and "))
   result <- dbGetQuery(conn, query, params = values)
   result$datetime <- as.POSIXct(result$datetime, origin = "1970-01-01",
                                 tz = "CST6CDT")
@@ -42,8 +42,7 @@ session assignment.
 }
 
 showSchedule <- function(alltalks = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-ForKevin-final.csv",
-output = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/schedule.pdf",
-                         judge = NULL) {
+output = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/schedule.pdf") {
 
   judges <- showTable("judges")
   sessiondb <- showTable("sessions")
