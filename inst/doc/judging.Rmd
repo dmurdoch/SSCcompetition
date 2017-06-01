@@ -1,0 +1,33 @@
+---
+title: "Schedule for `r (talks <- SSCcompetition::getTalks(judge=params$judge))$judgeName[1]`"
+date: "`r Sys.Date()`"
+output: 
+  pdf_document:
+    extra_dependencies: "pdfpages"
+params:
+  judge:  1
+  dir: "."
+  summaries: character()
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+knitr::kable(talks[, c("datetime", "studentName", "studentAffiliation")])
+```
+
+```{r results="asis", echo = FALSE}
+cat("\\setkeys{Gin}{width=\\textwidth}\n")
+for (i in seq_len(nrow(talks))) {
+  talk <- talks[i,]
+  cat("\\newpage\n")
+  cat(talk$datetime, "\n")
+  abstract <- readLines(file.path(dir, "Abstracts", talk$abstract))
+  cat("```\n")
+  cat(abstract, sep = "\n")
+  cat("```\n")
+  cat("\\includepdf[fitpaper=true,frame=true,pages=-]{",params$summaries[i],"}\n", sep="")
+}
+```

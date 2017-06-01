@@ -37,7 +37,7 @@ getTalks <- function(student, judgeId, sessionId) {
     interp$student <- student
   }
   if (!missing(judgeId)) {
-    conds <- c(conds, "(judge1Id = ?judgeId or judge2Id = ?judgeId)")
+    conds <- c(conds, "judgeId = ?judgeId")
     interp$judgeId <- judgeId
   }
   if (!missing(sessionId)) {
@@ -46,15 +46,47 @@ getTalks <- function(student, judgeId, sessionId) {
   }
   conn <- getConn()
   on.exit(doneWith(conn))
-  query <- "select Students.name as studentName, Students.affiliation as studentAffiliation,
-                   date as dateReceived, Judges.name as judgeName,
-                   expertise, Judges.affiliation as judgeAffiliation from Students, Judges"
+  query <- "select studentId, Students.name as studentName, Students.affiliation as studentAffiliation,
+                   judgeId, Judges.name as judgeName,
+                   Judges.affiliation as judgeAffiliation,
+                   session, datetime, abstract, summaryFile
+                   from Students, Judges, Judging
+                   where Students.idnum = studentId and Judges.idnum = judgeId"
   if (length(conds)) {
-    query <- paste(query, "where", paste(conds, collapse = " and "))
+    query <- paste(query, "and", paste(conds, collapse = " and "))
     query <- do.call(DBI::sqlInterpolate,
                      c(list(conn, query), interp))
   }
+  query <- paste(query, "order by judgeId, datetime")
   result <- dbGetQuery(conn, query)
-  result$dateReceived <- as.Date(result$dateReceived, origin = "1970-01-01")
   result
 }
+
+# Initialize the "judging" table using the timetable.
+
+initJudging <- function() {
+  judging <- showTable("judging")
+  if (nrow(judging)) stop("judging table is not empty")
+  judges <- showTable("judges")
+  students <- subset(showTable("students"), !is.na(summaryFile) & confirmed & grepl("General", competition))
+  for (j in judges$idnum) {
+    judge <- subset(judges, idnum == j)
+    sessions <- sub(":.*$", "", judge$note)
+    for (session in strsplit(sessions, ",")[[1]]) {
+      s <- as.numeric(session)
+      if (!is.na(s)) {
+        students1 <- subset(students, session == s)
+        assignJudges(students1$idnum, j, append = TRUE)
+      } else {
+        s <- as.numeric(sub("(", "", sub(")", "", session, fixed = TRUE), fixed = TRUE))
+        if (!is.na(s))
+          cat(sprintf("Judge %d (%s) is partial for session %d; not added.\n",
+                      j, judge$name, s))
+        else
+          cat(sprintf("Session '%s' not recognized for judge %d (%s).\n",
+                      session, j, judge$name))
+      }
+    }
+  }
+}
+
