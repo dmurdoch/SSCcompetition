@@ -1,4 +1,4 @@
-newSession <- function(name, date = NA, time = NA, contributed = TRUE) {
+newSession <- function(name, date = NA, time = NA, contributed = TRUE, room = NA) {
   idnum <- getID(name, "Sessions", unique = FALSE)
   if (length(idnum)) {
     warning("Session ", dQuote(name), " already in table, not added.")
@@ -15,6 +15,7 @@ newSession <- function(name, date = NA, time = NA, contributed = TRUE) {
   df <- data.frame(idnum = idnum, name = name,
                    datetime = as.numeric(datetime),
                    contributed = as.numeric(contributed),
+                   room = as.character(room),
                    stringsAsFactors = FALSE)
   conn <- getConn()
   on.exit(doneWith(conn))
@@ -38,7 +39,8 @@ loadSessions <- function(csv = paste0("~/work/SSC/StudentAwards/Student Presenta
                  contributed = talk$Type.of.Presentation != "Invited")
       sessions <- rbind(sessions, data.frame(idnum = session, name = talk$Session,
                                              datetime = as.POSIXct(paste(talk$Date, talk$StartTime), tz="CST6CDT", origin = "1970-01-01"),
-                                             contributed = talk$Type.of.Presentation != "Invited"))
+                                             contributed = talk$Type.of.Presentation != "Invited"),
+                                             room = NA)
 
     } else if (length(session) == 1) {
       sessions[sessions$idnum == session, "datetime"] <- as.POSIXct(paste(talk$Date, talk$StartTime), tz="CST6CDT", origin = "1970-01-01")

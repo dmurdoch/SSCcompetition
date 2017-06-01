@@ -49,9 +49,10 @@ getTalks <- function(student, judgeId, sessionId) {
   query <- "select studentId, Students.name as studentName, Students.affiliation as studentAffiliation,
                    judgeId, Judges.name as judgeName,
                    Judges.affiliation as judgeAffiliation,
-                   session, datetime, abstract, summaryFile
-                   from Students, Judges, Judging
-                   where Students.idnum = studentId and Judges.idnum = judgeId"
+                   session, Students.datetime as datetime,
+                   Students.title as title, room, Sessions.name as sessionName, abstract, summaryFile
+                   from Students, Judges, Judging, Sessions
+                   where Students.idnum = studentId and Judges.idnum = judgeId and Sessions.idnum = Students.session"
   if (length(conds)) {
     query <- paste(query, "and", paste(conds, collapse = " and "))
     query <- do.call(DBI::sqlInterpolate,
