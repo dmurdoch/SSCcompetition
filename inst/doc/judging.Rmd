@@ -4,6 +4,7 @@ date: "`r Sys.Date()`"
 output: 
   pdf_document:
     extra_dependencies: "pdfpages"
+classoption: "twoside"
 params:
   judge:  1
   dir: "."
@@ -19,15 +20,15 @@ knitr::kable(talks[, c("datetime", "studentName", "studentAffiliation")])
 ```
 
 ```{r results="asis", echo = FALSE}
-cat("\\setkeys{Gin}{width=\\textwidth}\n")
+cat("\\pagestyle{empty}\n")
 for (i in seq_len(nrow(talks))) {
   talk <- talks[i,]
-  cat("\\newpage\n")
+  cat("\\cleardoublepage\n")
   cat(talk$datetime, "\n")
   abstract <- readLines(file.path(dir, "Abstracts", talk$abstract))
   cat("```\n")
   cat(abstract, sep = "\n")
   cat("```\n")
-  cat("\\includepdf[fitpaper=true,frame=true,pages=-]{",params$summaries[i],"}\n", sep="")
+  cat("\\includepdf[fitpaper=true,pages=-]{",params$summaries[i],"}\n", sep="")
 }
 ```

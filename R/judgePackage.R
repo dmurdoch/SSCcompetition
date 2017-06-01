@@ -26,6 +26,9 @@ judgePackages <- function(dir = "~/work/SSC/StudentAwards/Student Presentation A
   for (i in seq_len(nrow(judges))) {
     judge <- judges[i,]
     judgePackage(judge$idnum, dir)
+  }
+  for (i in seq_len(nrow(judges))) {
+    judge <- judges[i,]
     cat(judge$name, " <", judge$email, ">\n", sep="")
   }
 }
