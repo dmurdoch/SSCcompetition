@@ -10,13 +10,15 @@ getSession <- function(...) {
   result
 }
 
+globalVariables(c("datetime", "Date", "StartTime", "Session"))
+
 showCompetitors <- function(output = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/competitors.pdf") {
   allstudents <- showTable("Students")
   allstudents <- subset(allstudents, confirmed & !is.na(summaryFile) & grepl("General", competition) &
                           (is.na(datetime) | datetime < as.POSIXct("2017-06-14", tz="CST6CDT")))
   o <- order(allstudents$session)
   allstudents <- allstudents[o,]
-  md <- file(paste0(tools::file_path_sans_ext(output), ".Rmd"), open = "wt")
+  md <- file(paste0(file_path_sans_ext(output), ".Rmd"), open = "wt")
   writeLines('---
 title: "Competitors in SSC General Competition"
 author: "Duncan Murdoch"
@@ -47,7 +49,7 @@ output = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/
   judges <- showTable("judges")
   sessiondb <- showTable("sessions")
 
-  md <- file(paste0(tools::file_path_sans_ext(output), ".Rmd"), open = "wt")
+  md <- file(paste0(file_path_sans_ext(output), ".Rmd"), open = "wt")
   writeLines('---
 title: "Schedule Summary"
 author: "Duncan Murdoch"

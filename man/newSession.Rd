@@ -7,10 +7,10 @@ Add a session to the database.
 Adds a session to the database.
 }
 \usage{
-newSession(name, date = NA, time = NA, contributed = TRUE)
+newSession(name, date = NA, time = NA, contributed = TRUE, room = NA)
 }
 \arguments{
-  \item{name, date, time, contributed}{
+  \item{name, date, time, contributed, room}{
 Characteristics of the session.
 }
 }

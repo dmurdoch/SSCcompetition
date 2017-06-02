@@ -9,9 +9,10 @@ status of their entry:  which award, presence or absence
 of summary file.
 }
 \usage{
-entrySummary(
-  abstractDir = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/Abstracts",
-  summaryDir = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/Summaries")
+entrySummary(abstractDir =
+"~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/Abstracts",
+  summaryDir =
+"~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/Summaries")
 }
 \arguments{
   \item{abstractDir, summaryDir}{

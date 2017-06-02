@@ -3,10 +3,12 @@ export("assignJudges",
        "getTalks", "initJudging", "judgePackage", "judgePackages", "loadSessions", "loadTiming",
        "mergeSSC",
        "newJudge", "newSession", "newStudent", "replaceTable",
-       "scoresheet_oral", "scoresheet_poster", "showCompetitors", "showSchedule", "showName",
+       "scoresheet", "showCompetitors", "showSchedule", "showName",
        "showTable", "updateStudents")
 importFrom("RSQLite", "dbDisconnect",
            "dbConnect", "dbWriteTable",
            "SQLite", "dbGetQuery")
 importFrom("DBI", "sqlInterpolate")
 importFrom("utils", "edit", "read.csv")
+importFrom("rmarkdown", "render")
+importFrom("tools", "file_path_sans_ext")

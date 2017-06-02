@@ -1,3 +1,5 @@
+globalVariables(c("competition", "summaryFile", "confirmed", "idnum"))
+
 entrySummary <- function(abstractDir = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/Abstracts",
                          summaryDir = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/Summaries") {
   abstracts <- list.files(abstractDir)

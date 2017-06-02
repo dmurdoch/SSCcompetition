@@ -8,4 +8,5 @@ Description: Helps manage data for scheduling students
    in the SSC SRC.
 License: GPL
 LazyData: TRUE
-Imports: DBI, RSQLite
+Imports: DBI, RSQLite, rmarkdown, tools
+Encoding: UTF-8

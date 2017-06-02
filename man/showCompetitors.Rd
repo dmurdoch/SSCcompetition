@@ -9,7 +9,8 @@ Writes out R Markdown file to be processed into PDF file
 listing info from the database.
 }
 \usage{
-showCompetitors(output = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/competitors.pdf")
+showCompetitors(output =
+"~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/competitors.pdf")
 showSchedule(alltalks =
 "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017/ContributedPresentations-ForKevin-final.csv",
 output =

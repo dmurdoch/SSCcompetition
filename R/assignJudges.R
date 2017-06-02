@@ -55,7 +55,7 @@ getTalks <- function(student, judgeId, sessionId) {
                    where Students.idnum = studentId and Judges.idnum = judgeId and Sessions.idnum = Students.session"
   if (length(conds)) {
     query <- paste(query, "and", paste(conds, collapse = " and "))
-    query <- do.call(DBI::sqlInterpolate,
+    query <- do.call(sqlInterpolate,
                      c(list(conn, query), interp))
   }
   query <- paste(query, "order by judgeId, datetime")

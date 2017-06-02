@@ -13,7 +13,7 @@ judgePackage <- function(judge, dir = "~/work/SSC/StudentAwards/Student Presenta
   olddir <- setwd(file.path(dir, "Judging"))
   pdf <- file.path(dir, "Judging", paste0(judgeName, ".pdf"))
   file.copy(file.path(dir, "Summaries", talks$summaryFile), ".")
-  rmarkdown::render(system.file("doc/judging.Rmd", package = "SSCcompetition"),
+  render(system.file("doc/judging.Rmd", package = "SSCcompetition"),
                     output_file = pdf,
                     intermediates_dir = file.path(dir, "Judging"),
                     params = list(judge = judge, dir = dir, summaries = talks$summaryFile))
@@ -21,7 +21,8 @@ judgePackage <- function(judge, dir = "~/work/SSC/StudentAwards/Student Presenta
   setwd(olddir)
 }
 
-scoresheet_oral <- function(talk) {
+scoresheet <- function(talk, oral = TRUE) {
+  if (oral) {
   cat("\\begin{center}
 \\textbf{Statistical Society of Canada Annual Meeting  / Congrès annuel de la Société statistique du Canada} \\\\
 \\textbf{Student Research Presentation Score Sheet / Fiche d’évaluation de la présentation de recherche étudiante} \\\\
@@ -65,9 +66,7 @@ Overall quality / Qualité globale & 1 & 2 & 3 & 4 & 5 \\\\
 \\vspace{2in}
 Judge/Juge:  ", talk$judgeName, "\\hspace{0.5in}Signature:
 ")
-}
-
-scoresheet_poster <- function(talk) {
+} else {
   cat("\\begin{center}
 \\textbf{Statistical Society of Canada Annual Meeting  / Congrès annuel de la Société statistique du Canada} \\\\
 \\textbf{Student Research Poster Score Sheet / Fiche d’évaluation de l’affiche de recherche étudiante} \\\\
@@ -111,6 +110,7 @@ Overall quality / Qualité globale & 1 & 2 & 3 & 4 & 5 \\\\
 \\vspace{2in}
 Judge/Juge:  ", talk$judgeName, "\\hspace{0.5in}Signature:
 ")
+}
 }
 
 judgePackages <- function(dir = "~/work/SSC/StudentAwards/Student Presentation Awards/Competition 2017") {
