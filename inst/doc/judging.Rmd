@@ -3,7 +3,6 @@ title: "Schedule for `r (talks <- SSCcompetition::getTalks(judge=params$judge))$
 output: 
   pdf_document:
     extra_dependencies: "pdfpages"
-    keep_tex: true
 classoption: "twoside"
 params:
   judge:  1
@@ -29,7 +28,10 @@ for (i in seq_len(nrow(talks))) {
   cat("```\n")
   cat(abstract, sep = "\n")
   cat("```\n\\clearpage\n")
-  scoresheet(talk)
+  if (grepl("Poster", talk$sessionName))
+    scoresheet_poster(talk)
+  else
+    scoresheet_oral(talk)
   cat("\\includepdf[fitpaper=true,pages=-]{",params$summaries[i],"}\n", sep="")
 }
 ```
